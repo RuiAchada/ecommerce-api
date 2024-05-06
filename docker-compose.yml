@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .  # Directory that is the context of the build (the path where Dockerfile is located)
+      dockerfile: Dockerfile  # Name of the Dockerfile (default is 'Dockerfile')
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+
+  db:
+    image: postgis/postgis:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
