@@ -1,10 +1,20 @@
 // src/index.ts
 import Fastify from "fastify";
+import db from "../db/config";
+import * as schema from "../db/schema";
 
 const server = Fastify({ logger: true });
 
 server.get("/", async (request, reply) => {
 	return { hello: "world" };
+});
+
+server.get("/users", async (request, reply) => {
+	const result = await db.select().from(schema.users);
+	if (result.length === 0) {
+		throw new Error("No documents found");
+	}
+	return result;
 });
 
 const start = async () => {
