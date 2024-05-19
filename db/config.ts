@@ -3,9 +3,19 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { Client } from "pg";
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+	connectionString: process.env.DATABASE_URL,
 });
 
-await client.connect();
-const db = drizzle(client);
-console.log('db', db)
+//const client = new Client({
+//	host: "127.0.0.1",
+//	port: 5432,
+//	user: "",
+//	password: "",
+//	database: "",
+//});
+
+export default async () => {
+	await client.connect();
+	const db = drizzle(client);
+	return db;
+};
