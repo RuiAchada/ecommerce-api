@@ -1,21 +1,12 @@
 // src/index.ts
 import Fastify from "fastify";
-import db from "../db/config";
+import { db } from "@db";
 import * as schema from "../db/schema";
+import { generateModelRoutes } from "./rest/models";
 
 const server = Fastify({ logger: true });
 
-server.get("/", async (request, reply) => {
-	return { hello: "world" };
-});
-
-server.get("/users", async (request, reply) => {
-	const result = await db.select().from(schema.users);
-	if (result.length === 0) {
-		throw new Error("No documents found");
-	}
-	return result;
-});
+generateModelRoutes(server, db);
 
 const start = async () => {
 	try {
