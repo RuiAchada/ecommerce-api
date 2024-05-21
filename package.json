@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx --watch --env-file=.env.development.local src/index.ts",
+    "dev": "tsx watch --env-file=.env.development.local src/index.ts",
     "build": "tsc",
     "prestart": "pnpm build",
     "start": "tsx --env-file=.env.production.local dist/src/index.js"
