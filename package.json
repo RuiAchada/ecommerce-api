@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "tsx watch --env-file=.env.development.local src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "prestart": "pnpm build",
+    "start": "tsx --env-file=.env.production.local dist/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,14 +15,18 @@
   "dependencies": {
     "drizzle-orm": "^0.29.3",
     "fastify": "^4.26.0",
+    "graphql": "^16.8.1",
+    "mercurius": "^14.1.0",
     "pg": "^8.11.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.3",
     "@types/node": "^20.11.16",
     "@types/pg": "^8.11.0",
-    "drizzle-kit": "^0.20.14",
+    "drizzle-kit": "^0.21.2",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
+    "tsx": "^4.10.5",
     "typescript": "^5.3.3"
   }
 }
